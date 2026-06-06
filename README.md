@@ -2,26 +2,55 @@
 
 An autonomous browser automation agent powered by Gemini and browser-use.
 
-## Download & Install
+---
+
+## Option A — Windows Installer (Recommended)
+
+No Python or dependencies needed. Everything is bundled.
 
 1. Go to [Releases](https://github.com/JosephGoIt/bluebot-agent/releases/latest)
-2. Download `Bluebot-Setup.exe`
-3. Run the installer — it installs to `C:\Program Files\Bluebot Agent`
-4. Open `config.txt` in the install folder and fill in your details:
+2. Download `Bluebot-Setup.exe` and run it
+3. Open `config.txt` in the install folder (`C:\Program Files\Bluebot Agent\`)
+4. Fill in your credentials:
 
 ```
 GEMINI_API_KEY=your_key_here
 CHROME_PATH=C:\Program Files\Google\Chrome\Application\chrome.exe
 ```
 
+5. Launch **Bluebot Agent** from the desktop shortcut
+
 Get a free Gemini API key at https://aistudio.google.com/apikey
 
-## Requirements
+**Requirements:** Windows 10/11 (64-bit) · Google Chrome · Gemini API key
 
-- Windows 10/11 (64-bit)
-- Google Chrome installed
-- A Gemini API key
+---
+
+## Option B — Run from Source (Developers / Power Users)
+
+Requires Python 3.12+.
+
+```
+git clone https://github.com/JosephGoIt/bluebot-agent.git
+cd bluebot-agent
+setup.bat
+```
+
+`setup.bat` handles everything automatically:
+- Creates a virtual environment
+- Installs all dependencies
+- Force-reinstalls pydantic/pydantic-core compiled extensions
+- Installs Playwright Chromium as a fallback browser
+- Creates a `config.txt` template
+
+Then edit `config.txt` and run:
+
+```
+venv\Scripts\python.exe main.py
+```
+
+---
 
 ## Usage
 
-Launch **Bluebot Agent** from the desktop shortcut or Start Menu, enter your task, and click **Execute Task**.
+Enter your task in the text box and click **Execute Task**. The agent will open Chrome, perform the task autonomously, and display the result in the app.
