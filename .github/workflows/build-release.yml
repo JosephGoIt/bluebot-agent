@@ -28,16 +28,18 @@ jobs:
           pip install -r requirements.txt
           pip install flet-desktop pyinstaller
 
+      - name: Bundle Flet desktop client into package
+        run: |
+          $ver = python -c "import flet_desktop.version; print(flet_desktop.version.version)"
+          $appDir = python -c "from flet_desktop import get_package_bin_dir; print(get_package_bin_dir())"
+          New-Item -ItemType Directory -Force $appDir | Out-Null
+          $url = "https://github.com/flet-dev/flet/releases/download/v$ver/flet-windows.zip"
+          Write-Output "Downloading Flet desktop client v$ver..."
+          Invoke-WebRequest -Uri $url -OutFile "$appDir\flet-windows.zip"
+          Write-Output "Flet client bundled at $appDir"
+
       - name: Build standalone executable
-        run: >
-          flet pack main.py
-          --name Bluebot
-          --noconfirm
-          --clean
-          --collect-all browser_use
-          --collect-all google.genai
-          --collect-all google.auth
-          --collect-all playwright
+        run: pyinstaller bluebot.spec --noconfirm --clean
 
       - name: Install Inno Setup
         run: choco install innosetup --yes
