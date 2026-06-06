@@ -1,0 +1,14 @@
+venv/
+__pycache__/
+*.pyc
+*.pyo
+dist/
+build/
+*.spec.bak
+.tmp/
+config.txt
+*.env
+.env
+token.json
+credentials.json
+Output/
