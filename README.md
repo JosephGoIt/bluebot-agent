@@ -10,8 +10,8 @@ No Python or dependencies needed. Everything is bundled.
 
 1. Go to [Releases](https://github.com/JosephGoIt/bluebot-agent/releases/latest)
 2. Download `Bluebot-Setup.exe` and run it
-3. Open `config.txt` — the installer shows you the exact path, but it's always at:
-   `C:\Users\<you>\AppData\Roaming\Bluebot Agent\config.txt`
+3. Open `config.txt` — the installer pops up the exact path, but it's always at:
+   `C:\Users\<you>\Downloads\Bluebot Agent\config.txt`
 4. Fill in your credentials:
 
 ```

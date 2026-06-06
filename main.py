@@ -43,10 +43,7 @@ def load_or_create_config():
     log_point("config", "Checking application directory for config.txt...")
 
     if getattr(sys, 'frozen', False):
-        # Program Files is read-only for normal users; use writable AppData instead
-        app_data = os.environ.get("APPDATA", os.path.expanduser("~"))
-        current_dir = os.path.join(app_data, "Bluebot Agent")
-        os.makedirs(current_dir, exist_ok=True)
+        current_dir = os.path.dirname(sys.executable)
     else:
         current_dir = os.path.dirname(os.path.abspath(__file__))
         
