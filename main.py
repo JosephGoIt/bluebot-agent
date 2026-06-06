@@ -41,9 +41,12 @@ class VisualBrowser(BrowserSession):
 def load_or_create_config():
     """Ensures a config file exists and loads keys/paths into the environment."""
     log_point("config", "Checking application directory for config.txt...")
-    
+
     if getattr(sys, 'frozen', False):
-        current_dir = os.path.dirname(sys.executable)
+        # Program Files is read-only for normal users; use writable AppData instead
+        app_data = os.environ.get("APPDATA", os.path.expanduser("~"))
+        current_dir = os.path.join(app_data, "Bluebot Agent")
+        os.makedirs(current_dir, exist_ok=True)
     else:
         current_dir = os.path.dirname(os.path.abspath(__file__))
         

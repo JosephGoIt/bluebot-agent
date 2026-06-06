@@ -46,10 +46,14 @@ Filename: "{app}\{#MyAppExeName}"; Description: "{cm:LaunchProgram,{#StringChang
 [Code]
 procedure CreateConfigTemplate();
 var
+  ConfigDir: string;
   ConfigPath: string;
   Lines: TStringList;
 begin
-  ConfigPath := ExpandConstant('{app}\config.txt');
+  // Write to %APPDATA%\Bluebot Agent\ — always writable by the current user
+  ConfigDir := ExpandConstant('{userappdata}\Bluebot Agent');
+  ForceDirectories(ConfigDir);
+  ConfigPath := ConfigDir + '\config.txt';
   if not FileExists(ConfigPath) then
   begin
     Lines := TStringList.Create;
@@ -65,6 +69,9 @@ begin
       Lines.Free;
     end;
   end;
+  MsgBox('Config file created at:' + #13#10 + ConfigPath + #13#10#13#10 +
+         'Please open it and add your Gemini API key before launching the app.',
+         mbInformation, MB_OK);
 end;
 
 procedure CurStepChanged(CurStep: TSetupStep);
