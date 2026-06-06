@@ -28,8 +28,19 @@ jobs:
           pip install -r requirements.txt
           pip install pyinstaller
 
+      - name: Pre-fetch Flet desktop client
+        run: python -c "import flet_desktop"
+
       - name: Build standalone executable
-        run: pyinstaller bluebot.spec --noconfirm --clean
+        run: >
+          flet pack main.py
+          --name Bluebot
+          --noconfirm
+          --clean
+          --collect-all browser_use
+          --collect-all google.genai
+          --collect-all google.auth
+          --collect-all playwright
 
       - name: Install Inno Setup
         run: choco install innosetup --yes
