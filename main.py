@@ -3,8 +3,10 @@ import sys
 import asyncio
 
 if sys.platform == "win32":
-    sys.stdout.reconfigure(encoding="utf-8", errors="replace")
-    sys.stderr.reconfigure(encoding="utf-8", errors="replace")
+    if sys.stdout is not None:
+        sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+    if sys.stderr is not None:
+        sys.stderr.reconfigure(encoding="utf-8", errors="replace")
 from browser_use import Agent
 from browser_use.llm.google.chat import ChatGoogle
 from browser_use.browser.session import BrowserSession
